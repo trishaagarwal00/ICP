@@ -1,0 +1,39 @@
+class Solution {
+    public String frequencySort(String s) {
+        int hash[] = new int[127];
+        for (int i = 0; i < s.length(); i++) {
+            hash[s.charAt(i)]++;
+        }
+       List<Character>[] bucket= new List[s.length() + 1];
+        for(int i=0;i<127;i++)
+        {
+            int freq=hash[i];
+            if(freq>0)
+            {
+                if(bucket[freq]==null)
+                {
+                    bucket[freq]=new ArrayList<>();
+                }
+                bucket[freq].add((char)i);
+            }
+        }
+        String result="";
+        for(int freq=s.length();freq>0;freq--)
+        {
+            if(bucket[freq]!=null)
+            {
+                for(char ch:bucket[freq])
+            {
+                for(int i=0;i<freq;i++)
+                {
+                    result+=ch;
+                }
+            }
+
+        }
+        
+        }
+        return result;
+
+    }
+}
