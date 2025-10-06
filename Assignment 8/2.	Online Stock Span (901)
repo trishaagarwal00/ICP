@@ -1,0 +1,31 @@
+class Pair<T, U> {
+    public T first;
+    public U second;
+
+    public Pair(T first, U second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+class StockSpanner {
+Stack<Pair<Integer,Integer>>st;
+int index;
+    public StockSpanner() {
+       st = new Stack<>(); 
+       index=-1;
+    }
+    
+    public int next(int price) {
+        int ans=0;
+        index=index+1;
+        while(!st.isEmpty()&&st.peek().first<=price)
+        {
+            st.pop();
+        }
+        ans=index-(st.isEmpty()?-1:st.peek().second);
+        // st.push(price,index);
+        st.push(new Pair<>(price, index));
+        return ans;
+        
+    }
+}
