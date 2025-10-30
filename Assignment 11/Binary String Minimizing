@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int q = sc.nextInt();
+        StringBuilder out = new StringBuilder();
+        while (q-- > 0) {
+            int n = sc.nextInt();
+            long k = sc.nextLong();
+            String s = sc.next();
+            char[] arr = s.toCharArray();
+            int pos = 0;
+            StringBuilder res = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                if (arr[i] == '0') {
+                    long moves = i - pos;
+                    if (moves <= k) {
+                        k -= moves;
+                        res.append('0');
+                        pos++;
+                    } else {
+                        long newPos = i - k;
+                        arr[(int) newPos] = '0';
+                        arr[i] = '1';
+                        k = 0;
+                        break;
+                    }
+                }
+            }
+            for (int i = pos; i < n; i++) res.append(arr[i]);
+            out.append(res).append("\n");
+        }
+        System.out.print(out);
+    }
+}
