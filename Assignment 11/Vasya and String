@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        String s = sc.next();
+        System.out.println(Math.max(maxLen(s, n, k, 'a'), maxLen(s, n, k, 'b')));
+    }
+
+    static int maxLen(String s, int n, int k, char ch) {
+        int l = 0, r = 0, count = 0, ans = 0;
+        while (r < n) {
+            if (s.charAt(r) != ch) count++;
+            while (count > k) {
+                if (s.charAt(l) != ch) count--;
+                l++;
+            }
+            ans = Math.max(ans, r - l + 1);
+            r++;
+        }
+        return ans;
+    }
+}
